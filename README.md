@@ -2,7 +2,7 @@
 
 This SQL repo is sumally of query.
 
-[Setup](https://github.com/hikaori/SQL/edit/main/README.md#set-up) : Before run query.
+[Setup](https://github.com/hikaori/SQL/README.md#set-up) : Before run query.
 
 # Technology
 
@@ -29,40 +29,26 @@ This SQL repo is sumally of query.
 
 # SQL
 
-## Create Table / Alter Columns
+## Create Table / Alter Columns 
 
-- Create a table called `bands` which has `id` and `name` inside.
-- Create a table called `albums` which has `id`, `name`, and `band_id` inside.
+Create Table
+```
+CREATE TABLE bands (
+id INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
+name VARCHAR(225) NOT NULL 
+);
 
-- Foreign key(\*1) will be bands table's id and albums table's band_id.
-- Add `release_year` in `albums` table.
+CREATE TABLE album (
+id INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+name VARCHAR(225) NOT NULL,
+band_id INT NOT NULL REFERENCES bands(id) ON DELETE CASCADE
+);
+```
+Alter Columns
+```
+ALTER TABLE album 
+ADD release_year INT;
+```
+ Primary key / Foreign key / Not null / Result  check below commit.
+[branch1:Create bands and albums table](https://github.com/hikaori/SQL/pull/1)
 
-`bands` Table
-
-`name`: Type string that can store 225 character.Not null(\*2)
-
-`id` : Type integer. automaticaly inclease. Primary key(\*3).
-
-`albums` Table
-
-`name`: Type string that can store 225 character. Not null(\*2)
-
-`id` : Type integer. automaticaly inclease the number. Primary key(\*3).
-`release_year`: Type integer. Nullable since it's possible the the album has not release yet.
-`band_id`:Type integer. Not null(\*2) since all albums need to be has at least one band. This will be reference between two table (bands and albums table).
-
-\*1:Foreign key
-
-Refference different tables. Eg.) bands table's id and albums table's band_id.
-Error will happen if try to create a recode that doesn't have foreign key.
-Eg.) Error will happen when try to create an album that doesn't have band_id already exist in bands table.
-Error will happen if try to delete a recode that linking to the foreign key.
-Eg.) Error will happen if try to delete a band that linking to an album. So if you want to delete band you need to delete the linked album first.
-
-\*2: Not null
-
-Not null column mast allways has defined. so that it will returns an error if try to add a recode does not have name.
-
-\*3:Primary key
-
-Unique key
