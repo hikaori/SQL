@@ -29,13 +29,14 @@ This SQL repo is sumally of query.
 
 # SQL
 
-## Create Table / Alter Columns 
+## Create Table / Alter Columns
 
 Create Table
+
 ```
 CREATE TABLE bands (
-id INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
-name VARCHAR(225) NOT NULL 
+id INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+name VARCHAR(225) NOT NULL
 );
 
 CREATE TABLE album (
@@ -44,11 +45,98 @@ name VARCHAR(225) NOT NULL,
 band_id INT NOT NULL REFERENCES bands(id) ON DELETE CASCADE
 );
 ```
+
 Alter Columns
+
 ```
-ALTER TABLE album 
+ALTER TABLE album
 ADD release_year INT;
 ```
- Primary key / Foreign key / Not null / Result  check below commit.
+
+Primary key / Foreign key / Not null / Result check below commit.
 [branch1:Create bands and albums table](https://github.com/hikaori/SQL/pull/1)
 
+## Add/Update Data in Table / Query(select/Aliace/order) from the table
+
+Add data into table
+
+```
+INSERT INTO TableName (ColumnName)
+VALUES ('Value1'), ('Value2'), .... ,('Value5');
+```
+
+e.g 1)
+
+```
+INSERT INTO bands (name)
+VALUES ('Iron Maiden'), ('Deuce'),('Avenged Sevenfold'),('Ankor');
+```
+
+e.g 2)
+
+```
+INSERT INTO album (name, release_year, band_id)
+VALUES ('The number of the Beasts', 1985, 1),
+		('Power Slave', 1984, 1),
+		('Nightmare', 2018, 2),
+		('Nightmare', 2010, 3),
+		('Test Album', NULL , 3);
+```
+
+Update existed data.
+
+```
+UPDATE tableName
+SET upDateColumnName = upDateValue
+WHERE targetDataColumnName = targetDataColumnValue;
+```
+
+e.g)
+
+```
+UPDATE album
+SET release_year = 1982
+WHERE id = 1;
+```
+
+Query from table.
+Select all data from table.
+
+```
+SELECT * FROM tableName;
+```
+
+Select specific number of data.
+
+```
+SELECT * FROM tableName LIMIT 2;;
+```
+
+Aliace column.
+
+```
+SELECT id AS "ID", name AS "Band Name" FROM tableName;
+```
+
+Order by.
+
+```
+SELECT * FROM tableName ORDER BY columnName;
+SELECT * FROM tableName ORDER BY columnName ASC; // default is ascending order
+
+SELECT * FROM tableName ORDER BY columnName; DESC // descending order
+```
+
+Select condition data.
+
+```
+SELECT * FROM album
+WHERE name LIKE '%er%' OR band_id = 2 ;
+```
+
+```
+SELECT * FROM album
+WHERE release_year IS NULL;
+```
+
+Details check below commit. [branch2:]()
