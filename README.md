@@ -139,4 +139,4 @@ SELECT * FROM album
 WHERE release_year IS NULL;
 ```
 
-Details check below commit. [branch2:]()
+Details check below commit. [branch2:](https://github.com/hikaori/SQL/pull/2)
