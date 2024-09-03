@@ -180,3 +180,4 @@ e.g) Count band_id based on uniqe band_id
 SELECT band_id, COUNT(band_id) FROM albums
 GROUP BY band_id;
 ```
+Details check below commit. [branch3:JOIN,AGREGATE(average/sum/count) and GROUP BY](https://github.com/hikaori/SQL/pull/3)
