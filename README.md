@@ -140,3 +140,43 @@ WHERE release_year IS NULL;
 ```
 
 Details check below commit. [branch2:](https://github.com/hikaori/SQL/pull/2)
+
+## Joint table
+
+Joint Two table with id.
+e.g)
+
+```
+SELECT * FROM bands
+JOIN albums ON bands.id  = albums.band_id;
+
+SELECT * FROM bands
+LEFT JOIN albums ON bands.id  = albums.band_id;
+```
+
+## AGREGATE table
+
+Take all data and retun function on it.
+
+### AVERAGE / SUM
+
+e.g) Average number of release_year
+
+```
+SELECT AVG(release_year) FROM albums;
+```
+
+e.g) Sum of release_year
+
+```
+SELECT SUM(release_year) FROM albums;
+```
+
+### COUNT GROUP BY
+
+e.g) Count band_id based on uniqe band_id
+
+```
+SELECT band_id, COUNT(band_id) FROM albums
+GROUP BY band_id;
+```

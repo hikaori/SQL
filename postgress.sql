@@ -51,3 +51,46 @@ WHERE release_year = 1984 AND band_id = 1;
 
 SELECT * FROM album
 WHERE release_year IS NULL;
+
+SELECT * FROM bands;
+SELECT * FROM albums;
+SELECT * FROM bands
+JOIN albums ON bands.id  = albums.band_id;
+
+SELECT * FROM bands
+INNER JOIN albums ON bands.id  = albums.band_id;
+
+SELECT * FROM bands
+LEFT JOIN albums ON bands.id = albums.band_id;
+
+SELECT * FROM bands
+RIGHT JOIN albums ON bands.id = albums.band_id;
+
+SELECT AVG(release_year) FROM albums;
+
+SELECT SUM(release_year) FROM albums;
+
+SELECT * FROM albums ;
+SELECT band_id, COUNT(band_id) FROM albums
+GROUP BY band_id;
+
+SELECT b.name AS band_name, COUNT(a.id) AS num_albums
+FROM bands AS b
+LEFT JOIN albums AS a ON b.id  = a.band_id 
+GROUP BY b.id;
+
+SELECT b.name AS band_name, COUNT(a.id) AS num_albums
+FROM bands AS b
+LEFT JOIN albums AS a ON b.id  = a.band_id 
+GROUP BY b.id
+-- if you want to use value that created by aggregate(COUNT) need to use "HAVING" instead of "WHERE" + NOT before "GROUP BY" 
+HAVING COUNT(a.id) = 1; 
+
+
+SELECT b.name AS band_name, COUNT(a.id) AS n_albums
+FROM bands AS b
+LEFT JOIN albums AS a ON b.id  = a.band_id 
+WHERE b."name" = 'Deuce'
+GROUP BY b.id
+HAVING COUNT(a.id) = 1;
+
